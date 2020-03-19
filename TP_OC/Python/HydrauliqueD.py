@@ -31,22 +31,21 @@ from numpy import sqrt
 from Structures_N import m, mr, r, pr, fd, A, Ar
 
 def HydrauliqueD(pd):
-    
+
     # Pressions aux noeuds
     p = zeros(m)
     p[:mr] = pr
     p[mr:m] = pd
-    
+
     # Pertes de charge des arcs
     z = - A.T.dot(p)
-    
+
     # Debits des arcs
     q = z / sqrt(r*abs(z))
-    
+
     # Flux aux noeuds
     f = zeros(m)
     f[:mr] = Ar.dot(q)
     f[mr:m]= fd
-    
+
     return q, z, f, p
-    
